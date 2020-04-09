@@ -1,0 +1,8 @@
+安装gopm工具再安装go imports
+install gopm
+go get -v github.com/gpmgo/gopm
+
+install goimports
+gopm -g(把包安装到go path 目录下) -u(已安装更新包使用) -v golang.org/x/tools/cmd/goimports
+再gopath目录下执行go install golang.org/x/tools/cmd/goimports 将goimports安装到bin目录
+setting->tools->file watchers click + add

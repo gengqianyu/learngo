@@ -1,0 +1,9 @@
+mode: set
+map\map.go:5.13,8.2 2 0
+map\map.go:11.57,20.37 5 1
+map\map.go:45.2,45.26 1 1
+map\map.go:20.37,29.36 2 1
+map\map.go:36.3,36.65 1 1
+map\map.go:41.3,41.27 1 1
+map\map.go:29.36,31.4 1 1
+map\map.go:36.65,39.4 2 1
