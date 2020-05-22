@@ -10,7 +10,7 @@ func main() {
 	}
 	// 打印0到100所有奇数
 	for i := 0; i < 50; i++ {
-		printSlice(s1)
+		//printSlice(s1)
 		s1 = append(s1, 2*i+1)
 	}
 	fmt.Println(s1)
@@ -30,8 +30,9 @@ func main() {
 	// 拷贝一个slice
 	copy(s3, s2)
 	printSlice(s3)
-	// 删除一个slice元素 把第三个元素删除
+	// 删除一个slice元素 把第4个元素删除 第4个元素是0
 	s3 = append(s3[:3], s3[4:]...)
+	fmt.Println("删除一个元素")
 	printSlice(s3)
 	// slice 取出/删除第一个元素
 	front := s3[0]
