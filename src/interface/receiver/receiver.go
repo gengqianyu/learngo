@@ -24,17 +24,22 @@ func (s *S) Write(str string) {
 }
 
 func main() {
-	sValues := map[int]S{1: {data: "A"}}
+	sValues := map[int]S{
+		1: {data: "A"}, //定一个值类型s
+	}
 	//你只能通过值来调用read
 	data := sValues[1].Read()
 	fmt.Printf("data:%s\n", data)
-	//不能编译通过
+	//不能编译通过  Write方法是用指针接收者定义的
 	//sValues[1].Write("b")
 	//下面才能通过
 	sptr := &S{data: "d"}
 	sptr.Write("B")
 
-	Sptrs := map[int]*S{1: &S{data: "B"}}
+	//定义指针类型
+	Sptrs := map[int]*S{
+		1: &S{data: "B"}, //定义指针类型s
+	}
 	Sptrs[1].Write("C")
 	data = Sptrs[1].Read()
 	fmt.Printf("data:%s\n", data)
@@ -42,7 +47,7 @@ func main() {
 	// 函数的类型检查
 	//将 *RPCError 类型的变量赋值给 error 类型的变量 rpcErr；
 	var rpcErr error = NewRPCError(400, "unknown err")
-	//将 *RPCError 类型的变量 rpcErr 传递给签名中参数类型为 error 的 AsErr 函数；
+	//将 指针*RPCError 类型的变量 rpcErr 传递给签名中参数类型为 error 的 AsErr 函数；
 	err := AsError(rpcErr)
 	fmt.Println(err)
 }
@@ -54,7 +59,7 @@ type RPCError struct {
 }
 
 //在 Go 中：实现接口的所有方法就隐式的实现了接口；RPCError实现了error接口，因为实现了error接口的Error方法
-func (e *RPCError) Error() string {
+func (e *RPCError) Error() string { //只要定义了此方法，它就是一个错误类型，输出err的时候自动执行Error方法
 	return fmt.Sprintf("%s,code=%d", e.Message, e.Code)
 }
 

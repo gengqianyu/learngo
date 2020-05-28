@@ -23,7 +23,7 @@ func Count(lock *sync.Mutex) {
 func main() {
 	// 互斥锁 应该是临界区保护的硬件原子指令法，属于一个硬件实现估计。
 	lock := &sync.Mutex{}
-
+	//启动10个goroutine 去改变counter的值
 	for i := 0; i < 10; i++ {
 		// 在goroutine 中上锁 执行改变共享变量counter的值
 		go Count(lock)

@@ -13,7 +13,7 @@ go 语言的duck typing
 又具有java的类型检查(java是在写程序的时候做约束 检查是否实现了接口的get方法)
   java的问题在于不能同时实现多个接口
 还能具有php能实现多个接口的灵活性
-  php的问题在于，无法实现多接口的约束。
+  php的问题在于，无法实现多接口的约束()。
 
 接口的定义
 使用者(download)->实现者(retriever)
@@ -89,11 +89,12 @@ func session(s RetrieverPoster) string {
 
 // 使用者
 func main() {
-	// 生成retriever结构体对象并调用download方法
+	//定义一个r接口变量，约束是一个Retriever接口类型
 	var r Retriever
+	// 生成retriever结构体对象并调用download方法
 	// 使用值调用
 	r = mock.Retriever{"this is a pake www.baidu.com"}
-	// 实现的接口变量r肚子里有两个东西，（接口实现者的类型，接口实现者的值）
+	// 实现的接口变量r肚子里有两个东西，（接口实现者的类型(mock.Retriever)，接口实现者的值(mock.Retriever整个结构体)）
 	inspect(r)
 	fmt.Println(download(r))
 	// 使用指针调用
@@ -107,12 +108,12 @@ func main() {
 		UserAgent: "Mozilla/5.0",
 		TimeOut:   time.Minute,
 	}
-	// 实现的接口变量r肚子里有两个东西，（接口实现者的类型，接口实现者的指针）
+	// 实现的 接口变量r 肚子里有两个东西，（接口实现者的类型(*real.Retriever)，接口实现者的指针(&real.Retriever)）
 	inspect(r)
 	// 实现的接口变量r肚子里有两个东西，一个是接口实现者的类型，一个是接口实现者的值/指针
 
 	// type assertion 类型断言的方式查看接口变量
-	//使用接口点一个接口类型来拿出接口的值
+	//使用 接口变量 点一个接口类型 来拿出接口的值
 	//严格版本
 	typeRetriever := r.(*real.Retriever)
 	fmt.Println("timeout:", typeRetriever.TimeOut)

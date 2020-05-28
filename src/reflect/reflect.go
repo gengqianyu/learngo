@@ -20,9 +20,10 @@ func main() {
 
 	// 从反射对象转换回基本类型
 	//获取反射对象
-	reflectObjValue := reflect.ValueOf(1)
+	a := 1
+	reflectObjValue := reflect.ValueOf(a)
 	//从反射对象转到接口,接口也是有类型的
-	a := reflectObjValue.Interface().(int)
+	a = reflectObjValue.Interface().(int)
 	fmt.Printf("%T,%d\n", a, a)
 
 	i := 1
