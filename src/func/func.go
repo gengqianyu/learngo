@@ -78,6 +78,7 @@ func div(a, b int) (q, r int) {
 
 //函数式编程
 func apply(op func(a, b int) int, a, b int) int {
+	//reflect.ValueOf(op).Pointer() 返回一个uintptr类型
 	fmt.Printf("Calling %s with %d,%d\n", runtime.FuncForPC(reflect.ValueOf(op).Pointer()).Name(), a, b)
 	return op(a, b)
 }
