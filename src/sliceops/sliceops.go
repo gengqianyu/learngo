@@ -23,6 +23,7 @@ func main() {
 	s3 := make([]int, 16)
 	s4 := make([]int, 16, 32)
 	if s3 != nil {
+		fmt.Println("s3")
 		printSlice(s3)
 	}
 	printSlice(s4)

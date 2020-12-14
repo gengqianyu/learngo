@@ -85,9 +85,9 @@ func versionOne() {
 		select {
 		/*
 			这个版本虽然worker可以处理并打印，来自c1，c2发来的消息，但是有个问题。
-			之所以能正常打印，那是因为 从c1，c2接收消息比较慢，c1,c2发送端goroutine向c1，c2发消息的时候block了，TimeSleep了
+			之所以能正常打印，那是因为 从c1，c2接收消息比较慢，c1,c2的发送端的goroutine通过channel向c1，c2发消息的时候block了，TimeSleep了
 			worker处理这些消息比较快。所以没问题。
-			那么如果c1,c2发送端的 goroutine向c1，c2发消息非常快；那么worker正在等待I/O打印消息n。
+			那么如果c1,c2发送端的goroutine通过channel向c1，c2发消息非常快；那么worker正在等待I/O打印消息n。
 			c1,c2接收端又收到一个消息，并把它赋给n。那么此时变量n，在未打印之前就被重写成下一个消息了。
 			从而worker在打印的时候，会处理不了所有消息（n来回被新消息重写）
 		*/
