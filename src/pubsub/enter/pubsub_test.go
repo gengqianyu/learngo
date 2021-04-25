@@ -1,8 +1,9 @@
-package pubsub
+package enter
 
 import (
 	"os"
 	"os/signal"
+	"pubsub"
 	"strings"
 	"syscall"
 	"testing"
@@ -11,8 +12,8 @@ import (
 
 func TestPublisher_Publish(t *testing.T) {
 
-	pub := New(100*time.Millisecond, 10) //实例化发布者
-	defer pub.Close()                    //关闭发布者对象，同时关闭所有订阅者管道
+	pub := pubsub.New(100*time.Millisecond, 10) //实例化发布者
+	defer pub.Close()                           //关闭发布者对象，同时关闭所有订阅者管道
 
 	//添加一个新的订阅者，订阅全部主题，没有过滤
 	all := pub.Subscribe()

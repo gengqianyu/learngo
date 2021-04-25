@@ -143,7 +143,7 @@ func CreateCommand() *Command {
 			},
 			{
 				"cmd":     "go mod init package",
-				"example": "go tidy",
+				"example": "go mod init",
 				"flag": []string{
 					"nil",
 				},
