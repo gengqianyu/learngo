@@ -53,7 +53,7 @@ func calcTriangle(a, b int) int {
 	return c
 }
 
-func consts() {
+func setConst() {
 	const (
 		filename = "abc.txt"
 		a, b     = 3, 4
@@ -62,6 +62,9 @@ func consts() {
 	c = int(math.Sqrt(a*a + b*b))
 	fmt.Println(filename, c)
 }
+
+//枚举
+// iota 是 golang 语言的常量计数器,只能在常量的表达式中使用。
 
 func enums() {
 	const (
@@ -73,6 +76,9 @@ func enums() {
 	)
 
 	const (
+		// 1	1	1	1	1	1	1	1
+		// 128	64	32	16	8	4	2	1
+		// 1 向左移动 (10 * iota) 位
 		b = 1 << (10 * iota)
 		kb
 		mb
@@ -120,7 +126,7 @@ func main() {
 
 	euler()
 	triangle()
-	consts()
+	setConst()
 	fmt.Println()
 	enums()
 	s := NewSlice()
