@@ -32,12 +32,14 @@ func main() {
 	loop := 0
 
 	for {
-		// 利用互斥锁实现阻塞等待
-		lock.Lock() // 上锁
 
-		c := counter // 临界区 操作
+		c := func() int {
+			// 利用互斥锁实现阻塞等待
+			lock.Lock()         // 上锁
+			defer lock.Unlock() // 解锁
+			return counter      // 临界区 操作
+		}()
 
-		lock.Unlock() // 解锁
 		// go语言的runtime系统主动出让时间片，进行cpu调度。 用loop记录循环次数。
 		// 关闭主动调度。循环次数明显增加。可以测试。
 		// 在某些情况下打开主动调度，显然更节省资源
