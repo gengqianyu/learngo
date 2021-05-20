@@ -9,7 +9,7 @@ import (
 var counter int = 0 //共享内存
 
 func Count(lock *sync.Mutex) {
-	lock.Lock()         // 上锁
+	lock.Lock()         // 加锁
 	defer lock.Unlock() // 解锁
 	// 临界区：只允许一个进程进入，进入另一个进程意味着什么? 不能被调度。
 	// 被调度: 另一个进程只有被调度才能执行，才可能进入临界区，如何阻止调度? cli(); 临界区  sti(); 剩余区
@@ -21,7 +21,7 @@ func Count(lock *sync.Mutex) {
 }
 
 func main() {
-	// 互斥锁 应该是临界区保护的硬件原子指令法，属于一个硬件实现估计。
+	// 声明互斥锁 应该是临界区保护的硬件原子指令法，属于一个硬件实现估计。
 	var lock sync.Mutex
 	//启动10个goroutine 去改变counter的值
 	for i := 0; i < 10; i++ {
@@ -35,7 +35,7 @@ func main() {
 
 		c := func() int {
 			// 利用互斥锁实现阻塞等待
-			lock.Lock()         // 上锁
+			lock.Lock()         // 加锁
 			defer lock.Unlock() // 解锁
 			return counter      // 临界区 操作
 		}()
