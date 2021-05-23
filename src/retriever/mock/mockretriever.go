@@ -2,7 +2,7 @@ package mock
 
 import "fmt"
 
-// 定义retriever结构体
+// Retriever 定义retriever结构体
 type Retriever struct {
 	Contents string
 }

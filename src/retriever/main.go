@@ -51,7 +51,7 @@ type Retriever interface {
 	Get(url string) string
 }
 
-// 定义一个poster接口
+// Poster 定义一个poster接口
 type Poster interface {
 	Post(url string, form map[string]string) string
 }
@@ -72,7 +72,7 @@ func post(poster Poster) {
 	})
 }
 
-//组合接口
+// RetrieverPoster 组合接口
 type RetrieverPoster interface {
 	Retriever
 	Poster

@@ -52,21 +52,21 @@ func createWorker(id int) chan<- int {
 
 // 第一个版本，会有问题
 func versionOne() {
-	// niu channel 是可以在select中正常运行，但是它是不可能select到的。所以select永远执行default
+	// nil channel 是可以在select中正常运行，但是它是不可能select到结果的。所以select永远执行default
 	//var c1, c2 chan int // c1 and c2 zeroValue =nil
 
-	// 定义两个channel
+	// 定义两个 pipeline 用于两个 goroutine 通信
 	c1, c2 := generator(), generator()
-	// 创建另一个channel (worker)去接收，通过select从channel (c1,c2)接收的消息n，
-	// 在通过select转发过来的消息n
+	// 创建另一个 pipeline (worker)去接收，通过 select 从 pipeline (c1,c2)接收的消息 n，
+	// 在通过 select 转发收到的消息 n
 	worker := createWorker(0)
 
 	// receive data from c1 and c2
 	//n1 <- c1
 	//n2 <- c2
-	//初始化接收者消息n
+	//初始化接收者消息 n
 	n := 0
-	//用它标识是否接收到了从c1和c2发来的消息。
+	// 用它标识是否接收到了从c1和c2发来的消息。
 	hasValue := false
 	for {
 		// 定义一个只能给它发送消息的worker

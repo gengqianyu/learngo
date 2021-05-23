@@ -1,16 +1,16 @@
-package rpcdemo
+package services
 
 import "errors"
 
-type DemoService struct {
+type Demo struct {
 }
 
 type Args struct {
 	A, B int
 }
 
-//rpc method example
-func (d DemoService) Div(args Args, result *float64) error {
+// Div rpc method example
+func (d Demo) Div(args Args, result *float64) error {
 	if args.B == 0 {
 		return errors.New("divisor by zero")
 	}

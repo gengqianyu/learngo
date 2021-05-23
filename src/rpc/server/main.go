@@ -5,12 +5,12 @@ import (
 	"net"
 	"net/rpc"
 	"net/rpc/jsonrpc"
-	rpcdemo "rpc"
+	"rpc/services"
 )
 
 func main() {
-	// register a server
-	rpc.Register(rpcdemo.DemoService{})
+	// register a service
+	rpc.Register(services.Demo{})
 	// start up an tcp service and listen 1234 port
 	listener, err := net.Listen("tcp", ":1234")
 	if err != nil {
@@ -23,7 +23,7 @@ func main() {
 			log.Printf("accept error:%v", err)
 			continue
 		}
-		// 不能在这里当场做，会阻塞影响效率 所以得开goroutine
+		// 不能在这里当场做，会阻塞影响效率 所以得开 goroutine
 		go jsonrpc.ServeConn(conn)
 	}
 
