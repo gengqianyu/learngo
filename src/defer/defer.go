@@ -7,6 +7,7 @@ import (
 
 func main() {
 	//example 1
+	//向 defer 关键字传入的函数会在函数返回之前运行
 	//defer的执行顺序是倒序的，先进后出
 	//for i := 0; i < 5; i++ {
 	//	defer fmt.Println(i)
@@ -44,7 +45,7 @@ func executeTime() {
 	//后面表达式 time.Since(startedAt) 的结果不是在 main 函数退出之前计算的，
 	//而是在 defer 关键字调用时计算的，最终导致输出 0s
 	defer fmt.Println(time.Since(startedAt))
-	//下面拷贝的是函数的指针，因此能算出时间差
+	//虽然调用 defer 关键字时也使用值传递，但是因为拷贝的是函数指针，所以 time.Since(startedAt) 会在 main 函数返回前调用并打印出符合预期的结果。
 	defer func() {
 		fmt.Println(time.Since(startedAt))
 	}()

@@ -17,6 +17,7 @@ import (
 func generator() chan int {
 	out := make(chan int)
 	go func() {
+		defer close(out)
 		i := 0
 		for {
 			// 随机一个范围到1500的整数，转成持续时间 单位是毫秒

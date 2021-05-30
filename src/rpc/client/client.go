@@ -14,7 +14,7 @@ func main() {
 		panic(err)
 	}
 
-	//用这个四层 tcp 连接创建一个 五层应用 rpc 客户端
+	//用这个四层 tcp 连接创建一个 五层 rpc 客户端
 	client := jsonrpc.NewClient(conn)
 	defer client.Close()
 	args := services.Args{
