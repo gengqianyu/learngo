@@ -130,8 +130,15 @@ func versionTwo() {
 			activeWorker = worker
 			message = messages[0]
 		}
-
+		// 注意：空的 select 语句会直接阻塞当前 Goroutine，导致 Goroutine 进入无法被唤醒的永久休眠状态。
+		// 在通常情况下，如果 select 中没有 case 准备好，select 语句会阻塞当前 Goroutine 并等待多个 case 中的一个 channel 达到可以收发的状态。
+		// 但是如果 select 控制结构中包含 default 语句，那么这个 select 语句在执行时会遇到以下两种情况：
+		//	.当存在可以收发的 Channel 时，直接处理该 Channel 对应的 case；
+		//	.当不存在可以收发的 Channel 时，执行 default 中的语句；
+		// select 在遇到多个 <-ch 同时满足可读或者可写条件时会随机选择一个 case 执行其中的代码。因此 select 执行顺序是无法预测的。
+		// select 语句一次只能执行一个 case 分支，因此想要执行所有 case 分支，必须在外层加 for 循环。
 		select {
+
 		case n := <-c1: // 从c1接收消息,加入消息队列
 			messages = append(messages, n)
 		case n := <-c2: // 从c2接收消息，加入消息队列
