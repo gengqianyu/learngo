@@ -39,11 +39,22 @@ func tryRecover() {
 	//panic(errors.New("this is an error")) //可以panic任意类型
 	panic(123)
 }
+
 func main() {
 	// 接收二次 panic
 	defer func() {
+		fmt.Println("in main")
 		r := recover()
 		fmt.Println(r)
 	}()
+
+	//panic 只会触发当前 Goroutine 的延迟函数调用
+	//当我们运行这段代码时会发现 main 函数中的 defer 语句并没有执行，执行的只有当前 Goroutine 中的 defer。
+	//go func() {
+	//	defer println("in goroutine")
+	//	panic("")
+	//}()
+
 	tryRecover()
+
 }
