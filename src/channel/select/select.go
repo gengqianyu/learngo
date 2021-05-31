@@ -120,7 +120,7 @@ func versionTwo() {
 	// 定义一个计时器，time.After返回一个chan time；
 	// 下面的意思是10秒钟以后，向channel（exitTime）发送一个时间消息
 	exitTime := time.After(10 * time.Second)
-	// 定时查看messages队列长度,每秒一次 time.Tick返回也是一个 chan time
+	// 定时查看 messages 队列长度,每秒一次 time.Tick 返回也是一个 chan time
 	// 下面意思是说，会定时的向channel tick 发送一个时间消息。tick的类型为 <-chan Time 是一个channel
 	tick := time.Tick(time.Second)
 	for {

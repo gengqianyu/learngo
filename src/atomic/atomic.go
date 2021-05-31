@@ -30,7 +30,7 @@ func (a *atomicInt) get() int {
 	return int(a.value)
 }
 
-//  使用 waitGroup 就不用枷锁了
+//  使用 waitGroup 就不用加锁了
 func (a *atomicInt) syncAtomic() {
 	var wg sync.WaitGroup
 

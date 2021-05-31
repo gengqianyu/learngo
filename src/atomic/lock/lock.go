@@ -20,6 +20,8 @@ func Count(lock *sync.Mutex) {
 	fmt.Println("counter =", counter)
 }
 
+//Go 语言作为一个原生支持用户态进程（Goroutine）的语言，当提到并发编程、多线程编程时，往往都离不开锁这一概念。
+//锁是一种并发编程中的同步原语（Synchronization Primitives），它能保证多个 Goroutine 在访问同一片内存时不会出现竞争条件（Race condition）等问题。
 func main() {
 	// 声明互斥锁 应该是临界区保护的硬件原子指令法，属于一个硬件实现估计。
 	var lock sync.Mutex

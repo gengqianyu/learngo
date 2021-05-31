@@ -50,18 +50,18 @@ func printFileContents(reader io.Reader) {
 //按字符打印文件内容 ioutil 用法
 func printFile2(filename string) {
 	//将文件内容读进一个[]byte slice
-	file, e := ioutil.ReadFile(filename)
+	fileSlice, e := ioutil.ReadFile(filename)
 
 	if e != nil {
 		log.Fatal(e.Error())
 	}
 
-	fmt.Printf("type:%T,value:%s", file, file)
+	fmt.Printf("type:%T,value:%s", fileSlice, fileSlice)
 	fmt.Println("----------------------")
-	fmt.Println(string(file))
+	fmt.Println(string(fileSlice))
 
 	//遍历[]byte print element
-	for _, value := range file {
+	for _, value := range fileSlice {
 		fmt.Printf("%s \n", string(value))
 	}
 
