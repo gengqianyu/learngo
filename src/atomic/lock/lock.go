@@ -45,7 +45,7 @@ func main() {
 		// go语言的runtime系统主动出让时间片，进行cpu调度。 用loop记录循环次数。
 		// 关闭主动调度。循环次数明显增加。可以测试。
 		// 在某些情况下打开主动调度，显然更节省资源
-		runtime.Gosched()
+		runtime.Gosched() //协作式调度
 		loop++
 
 		if c >= 10 { //满足条件退出 当全部goroutine全部执行完毕 counter等于10时

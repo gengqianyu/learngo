@@ -39,11 +39,13 @@ goroutine的定义
 使用go run -race filename 来检测数据访问冲突
 
 goroutine 可能的切换点
+
 I/O select
 channel
 等待锁
 函数调用（可能）
 runtime.Gosched()
+
 以上只是参考，不能保证切换，不能保证在其它地方不切换
 
 */
