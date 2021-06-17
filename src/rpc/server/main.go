@@ -10,7 +10,8 @@ import (
 
 func main() {
 	// register a service
-	rpc.Register(services.Demo{})
+	rpc.Register(new(services.Demo))
+
 	// start up an tcp service and listen 1234 port
 	listener, err := net.Listen("tcp", ":1234")
 	if err != nil {

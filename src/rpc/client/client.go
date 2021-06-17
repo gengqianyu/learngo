@@ -14,20 +14,20 @@ func main() {
 		panic(err)
 	}
 
-	//用这个四层 tcp 连接创建一个 五层 rpc 客户端
+	//用这个四层 tcp connection 创建一个 五层 rpc 应用客户端
 	client := jsonrpc.NewClient(conn)
 	defer client.Close()
 	args := services.Args{
 		A: 10,
 		B: 2,
 	}
-	var result float64
+	var reply float64
 	//执行 rpc 远程调用
-	err = client.Call("Demo.Div", args, &result)
+	err = client.Call("Demo.Div", args, &reply)
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		fmt.Println(result)
+		fmt.Println(reply)
 	}
 
 }
