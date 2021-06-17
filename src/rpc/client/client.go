@@ -10,6 +10,8 @@ import (
 func main() {
 	//拨号连接 tcp 1234 获取一个 tcp 连接
 	conn, err := net.Dial("tcp", ":1234")
+	defer conn.Close()
+
 	if err != nil {
 		panic(err)
 	}
